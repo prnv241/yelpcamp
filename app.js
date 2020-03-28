@@ -21,8 +21,7 @@ app.locals.moment = require("moment");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 
-const uri = "mongodb+srv://global:pranav@yelpdb-q4k0v.mongodb.net/test?retryWrites=true&w=majority";
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
 	console.log("Connected");	
 }).catch(err => {
 	console.log("ERROR:", err.message);
