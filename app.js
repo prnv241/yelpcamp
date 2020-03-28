@@ -20,7 +20,10 @@ var MiddleFun = require("./middleware/index");
 app.locals.moment = require("moment");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
-mongoose.connect("mongodb://localhost:27017/yelp_campv5", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+
+const uri = "mongodb+srv://global:pranav@yelpdb-q4k0v.mongodb.net/test?retryWrites=true&w=majority";
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
