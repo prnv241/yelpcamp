@@ -22,7 +22,11 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 
 const uri = "mongodb+srv://global:pranav@yelpdb-q4k0v.mongodb.net/test?retryWrites=true&w=majority";
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+	console.log("Connected");	
+}).catch(err => {
+	console.log("ERROR:", err.message);
+});
 
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
