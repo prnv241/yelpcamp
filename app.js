@@ -16,7 +16,6 @@ var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");
 var MiddleFun = require("./middleware/index");
 
-// seedDB();
 app.locals.moment = require("moment");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -55,6 +54,6 @@ app.use(indexRoutes);
 app.use(campgroundRoutes);
 app.use(commentRoutes);
 
-app.listen(3000,function() {
+app.listen(3000 || process.env.port ,function() {
 	console.log("Yelpcamp server started!!");
 });
