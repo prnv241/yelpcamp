@@ -21,11 +21,15 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
-	console.log("Connected");	
-}).catch(err => {
-	console.log("ERROR:", err.message);
-});
+if(process.env.MODE && process.env.MODE == production) {
+	mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+		console.log("Connected");	
+	}).catch(err => {
+		console.log("ERROR:", err.message);
+	});
+} else {
+	mongoose.connect("mongodb://localhost:27017/blog_app", {useNewUrlParser: true, useUnifiedTopology: true});
+}
 
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
