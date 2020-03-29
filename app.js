@@ -19,17 +19,14 @@ var MiddleFun = require("./middleware/index");
 app.locals.moment = require("moment");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
-if(process.env.MODE && process.env.MODE == production) {
-	mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true}).then(() => {
-		console.log("Connected");	
-	}).catch(err => {
-		console.log("ERROR:", err.message);
-	});
-} else {
-	mongoose.connect("mongodb://localhost:27017/blog_app", {useNewUrlParser: true, useUnifiedTopology: true});
-}
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true}).then(() => {
+	console.log("Connected");	
+}).catch(err => {
+	console.log("ERROR:", err.message);
+});
+// 	mongoose.connect("mongodb://localhost:27017/blog_app", {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
