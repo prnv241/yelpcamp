@@ -19,6 +19,7 @@ var MiddleFun = require("./middleware/index");
 app.locals.moment = require("moment");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
 	console.log("Connected");	
@@ -54,6 +55,6 @@ app.use(indexRoutes);
 app.use(campgroundRoutes);
 app.use(commentRoutes);
 
-app.listen(3000 || process.env.port ,function() {
+app.listen(PORT ,function() {
 	console.log("Yelpcamp server started!!");
 });
